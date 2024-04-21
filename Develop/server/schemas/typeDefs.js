@@ -1,50 +1,55 @@
+// export type definitions
+module.exports = typeDefs;
+
+
 // import gql from apollo-server-express to define GraphQL schema
 const { gql } = require("apollo-server-express");
 
 // define GraphQL type definitions
 const typeDefs = gql`
   type Query {
-    me: User # Query to get the currently authenticated user
+    me: User
   }
 
   type User {
-    _id: ID # User ID
-    username: String # Username of the user
-    email: String # Email of the user
-    bookCount: Int # Number of books saved by the user
-    savedBooks: [Book] # List of books saved by the user
+    _id: ID
+    username: String
+    email: String
+    bookCount: Int
+    savedBooks: [Book]
   }
 
   type Book {
-    bookId: String # Unique identifier for the book
-    authors: [String] # Authors of the book
-    description: String # Description of the book
-    title: String # Title of the book
-    image: String # URL of the book cover image
-    link: String # URL to more information about the book
+    bookId: String
+    authors: [String]
+    description: String
+    title: String
+    image: String
+    link: String
   }
 
   type Auth {
-    token: ID! # Authentication token
-    user: User # Authenticated user
+    token: ID!
+    user: User
   }
 
   input BookInput {
-    authors: [String]! # Authors of the book
-    description: String! # Description of the book
-    title: String! # Title of the book
-    bookId: String! # Unique identifier for the book
-    image: String # URL of the book cover image
-    link: String # URL to more information about the book
+    authors: [String]!
+    description: String!
+    title: String!
+    bookId: String!
+    image: String
+    link: String
   }
 
   type Mutation {
-    login(email: String!, password: String!): Auth # Mutation to login and generate authentication token
-    addUser(username: String!, email: String!): Auth # Mutation to add a new user
-    saveBook(input: BookInput!): User # Mutation to save a book to user's list
-    removeBook(bookId: String!): User # Mutation to remove a book from user's list
+    login(email: String!, password: String!): Auth
+    addUser(username: String!, email: String!): Auth
+    saveBook(input: BookInput!): User
+    removeBook(bookId: String!): User
   }
 `;
 
 // export type definitions
 module.exports = typeDefs;
+
