@@ -1,7 +1,6 @@
 // export type definitions
 module.exports = typeDefs;
 
-
 // import gql from apollo-server-express to define GraphQL schema
 const { gql } = require("apollo-server-express");
 
@@ -52,4 +51,3 @@ const typeDefs = gql`
 
 // export type definitions
 module.exports = typeDefs;
-
