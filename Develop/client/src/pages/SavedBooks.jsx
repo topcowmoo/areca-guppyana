@@ -1,3 +1,4 @@
+// add necessary imports
 import { useState, useEffect } from "react";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 import { useMutation } from "@apollo/client";
@@ -7,16 +8,21 @@ import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
 const SavedBooks = () => {
+  // State to store searched books
   const [searchedBooks, setSearchedBooks] = useState([]);
 
+  // State to store search input value
   const [searchInput, setSearchInput] = useState("");
 
+  // State to store saved book IDs
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  // Effect to save updated savedBookIds to local storage
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
 
+  // Function to handle form submission for book search
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
@@ -25,6 +31,7 @@ const SavedBooks = () => {
     }
 
     try {
+      // Searching books using Google Books API
       const response = await searchGoogleBooks(searchInput);
 
       if (!response.ok) {
@@ -33,6 +40,7 @@ const SavedBooks = () => {
 
       const { items } = await response.json();
 
+      // Extracting relevant book data from API response
       const bookData = items.map((book) => ({
         bookId: book.id,
         authors: book.volumeInfo.authors || ["No author to display"],
@@ -41,6 +49,7 @@ const SavedBooks = () => {
         image: book.volumeInfo.imageLinks?.thumbnail || "",
       }));
 
+      // Updating state with searched books
       setSearchedBooks(bookData);
       setSearchInput("");
     } catch (err) {
@@ -48,8 +57,10 @@ const SavedBooks = () => {
     }
   };
 
+  // Mutation hook for saving a book
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
+  // Function to handle saving a book
   const handleSaveBook = async (bookId) => {
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
@@ -60,6 +71,7 @@ const SavedBooks = () => {
     }
 
     try {
+      // Calling the saveBook mutation
       const { data } = await saveBook({
         variables: { bookInput: bookToSave },
       });
@@ -69,6 +81,7 @@ const SavedBooks = () => {
         throw new Error("something went wrong!");
       }
 
+      // Updating savedBookIds state with the newly saved book ID
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
