@@ -1,11 +1,14 @@
+// Import necessary modules
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
+// Import components
 import App from './App.jsx'
 import SearchBooks from './pages/SearchBooks'
 import SavedBooks from './pages/SavedBooks'
 
+// Define routes using createBrowserRouter
 const router = createBrowserRouter([
   {
     path: '/',
@@ -23,6 +26,7 @@ const router = createBrowserRouter([
   }
 ])
 
+// Render the root component using ReactDOM.createRoot
 ReactDOM.createRoot(document.getElementById('root')).render(
   <RouterProvider router={router} />
 )

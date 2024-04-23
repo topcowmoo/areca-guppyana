@@ -1,17 +1,20 @@
+// Import necessary modules
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import Navbar from "./components/Navbar";
 import { setContext } from "@apollo/client/link/context";
 
+// Create HTTP link for Apollo Client
 const httpLink = createHttpLink({
   uri: "/graphql",
 });
 
+// Create authentication link using setContext
 const authLink = setContext((_, { headers }) => {
-  // get the authentication token from local storage if it exists
+  // Retrieve authentication token from local storage
   const token = localStorage.getItem('id_token');
-  // return the headers to the context so httpLink can read them
+  // Add token to headers if available
   return {
     headers: {
       ...headers,
@@ -20,12 +23,13 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+// Create Apollo Client instance
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
-// define the App component with ApolloProvider to provide the client to the entire app
+// Define the App component wrapped in ApolloProvider to provide the client to the entire app
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -35,5 +39,5 @@ function App() {
   );
 }
 
-// export the App component as the defualt export
+// Export the App component as the default export
 export default App;
