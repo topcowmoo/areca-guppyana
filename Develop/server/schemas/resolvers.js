@@ -23,10 +23,8 @@ const resolvers = {
       return User.find().select("-__v -password").populate("books");
     },
     // resolver for single user query
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
-        .select("-__v -password")
-        .populate("book");
+    user: async (parent, { _id }) => {
+      return User.findOne({ _id }).select("-__v -password").populate("book");
     },
   },
   Mutation: {

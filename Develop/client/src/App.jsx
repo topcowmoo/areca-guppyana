@@ -1,18 +1,27 @@
-// import CSS file for styling
 import "./App.css";
-
-// imoort Outlet component from react-router-dom
 import { Outlet } from "react-router-dom";
-
-// import modules from @apollo/client to use GraphQL
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
-
-// import Navbar component
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import Navbar from "./components/Navbar";
+import { setContext } from "@apollo/client/link/context";
 
-// create a new ApolloClient instance to connect to the GraphQL server
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: "/graphql",
+});
+
+const authLink = setContext((_, { headers }) => {
+  // get the authentication token from local storage if it exists
+  const token = localStorage.getItem('id_token');
+  // return the headers to the context so httpLink can read them
+  return {
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

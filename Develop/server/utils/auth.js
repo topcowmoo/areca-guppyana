@@ -1,10 +1,15 @@
 const jwt = require("jsonwebtoken"); // Import the jsonwebtoken library for handling JWTs
+const { GraphQLError } = require("graphql"); // Import the GraphQLError class from the graphql library
 
 // Set token secret and expiration date
 const secret = "mysecretsshhhhh"; // Secret key for JWT encryption
 const expiration = "2h"; // Expiration time for JWT tokens, set to 2 hours
 
 module.exports = {
+  AuthenticationError: new GraphQLError("Authentication Error"), // Custom error message for authentication errors
+  extensions: {
+    code: "UNAUTHENTICATED",
+  },
   // Middleware function for authentication
   authMiddleware: function (req) {
     // Allows token to be sent via req.body, req.query, or headers
