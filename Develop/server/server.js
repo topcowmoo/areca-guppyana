@@ -4,7 +4,6 @@ const { ApolloServer } = require("@apollo/server");
 const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 const { authMiddleware } = require("./utils/auth");
-const cors = require("cors");
 
 // Import GraphQL schema and resolvers
 const { typeDefs, resolvers } = require("./schemas");
@@ -25,8 +24,6 @@ const server = new ApolloServer({
 const startApolloServer = async () => {
   // Start Apollo Server
   await server.start();
-
-  app.use(cors());
 
   // Configure Express middleware
   app.use(express.urlencoded({ extended: false }));

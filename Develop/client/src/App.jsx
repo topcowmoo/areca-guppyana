@@ -12,7 +12,7 @@ import { setContext } from "@apollo/client/link/context";
 
 // Create HTTP link for Apollo Client
 const httpLink = createHttpLink({
-  uri: "/api/graphql",
+  uri: "/graphql",
 });
 
 // Create authentication link using setContext
