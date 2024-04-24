@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 
 // define GraphQL query to get user information
 export const GET_ME = gql`
-  query getMe {
+  query get_me {
     me {
       _id
       username

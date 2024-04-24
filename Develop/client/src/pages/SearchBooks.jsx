@@ -1,6 +1,6 @@
 // Import necessary modules and components
-import { useState, useEffect } from "react";
-import { useMutation, gql } from "@apollo/client";
+import { useState } from "react";
+import { useMutation } from "@apollo/client";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
 // Import authentication utility and API functions
@@ -8,22 +8,7 @@ import Auth from "../utils/auth";
 import { searchGoogleBooks } from "../utils/API";
 import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
 
-// Define GraphQL mutation for saving a book
-const SAVE_BOOK = gql`
-  mutation SaveBook($book: BookInput!) {
-    saveBook(book: $book) {
-      _id
-      username
-      savedBooks {
-        bookId
-        authors
-        title
-        description
-        image
-      }
-    }
-  }
-`;
+import { SAVE_BOOK } from "../utils/mutations";
 
 // Define SearchBooks component
 const SearchBooks = () => {
@@ -34,11 +19,6 @@ const SearchBooks = () => {
 
   // Define GraphQL mutation hook for saving a book
   const [saveBookMutation] = useMutation(SAVE_BOOK);
-
-  // Effect hook to save book IDs to local storage
-  useEffect(() => {
-    return () => saveBookIds(savedBookIds);
-  });
 
   // Function to handle form submission for book search
   const handleFormSubmit = async (event) => {
@@ -51,10 +31,6 @@ const SearchBooks = () => {
     try {
       const response = await searchGoogleBooks(searchInput);
 
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
       const { items } = await response.json();
 
       const bookData = items.map((book) => ({
@@ -63,6 +39,7 @@ const SearchBooks = () => {
         title: book.volumeInfo.title,
         description: book.volumeInfo.description,
         image: book.volumeInfo.imageLinks?.thumbnail || "",
+        link: book.volumeInfo.infoLink,
       }));
 
       setSearchedBooks(bookData);
@@ -82,11 +59,17 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBookMutation({
-        variables: { book: bookToSave },
+      await saveBookMutation({
+        variables: bookToSave,
       });
 
-      setSavedBookIds([...savedBookIds, data.saveBook._id]);
+      // If the book is successfully saved to the user's account, add the book's ID to the savedBookIds array in state
+      setSavedBookIds((prevSavedBookIds) => [
+        ...prevSavedBookIds,
+        bookToSave.bookId
+      ]);
+
+      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
     }
@@ -119,7 +102,6 @@ const SearchBooks = () => {
           </Form>
         </Container>
       </div>
-
       <Container>
         <h2 className="pt-5">
           {searchedBooks.length
@@ -167,6 +149,4 @@ const SearchBooks = () => {
     </>
   );
 };
-
-// Export SearchBooks component as the default export
 export default SearchBooks;

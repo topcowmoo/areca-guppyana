@@ -38,8 +38,8 @@ module.exports = {
   },
 
   // Function for generating JWT tokens
-  signToken: function ({ username, email, _id }) {
-    const payload = { username, email, _id };
+  signToken: function ({ name, email, _id }) {
+    const payload = { name, email, _id };
 
     // Sign the token with the payload, secret key, and expiration time
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
