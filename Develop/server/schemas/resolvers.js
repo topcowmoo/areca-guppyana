@@ -12,7 +12,7 @@ const resolvers = {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
           .select("-__v -password")
-          .populate("book");
+          .populate("savedBooks");
         return userData;
       }
       // Throw an authentication error if the user is not logged in
