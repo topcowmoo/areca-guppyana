@@ -11,13 +11,12 @@
   <p align="center">
   This app was built with React, MongoDB, Node.js and Express.js. It was a Google Books search applicaton that used restful API and now uses GraphQL and Apollo Server after I refactored it. Please check out the deployed version, which is hosted on Render (link below). Thank you.
 
-
 <br />
 <br />
 <a href="https://github.com/topcowmoo/areca-guppyana"><strong>Explore the docs »</strong></a>
 <br />
 <br />
-<!-- <a href="https://areca-guppyana.netlify.app/">Deployed App on Netlify</a> -->
+<a href="https://areca-guppyana.onrender.com">Deployed App on Render</a>
 ·
 <a href="https://github.com/topcowmoo/areca-guppyana/issues">Report Bug</a>
 ·
@@ -55,25 +54,25 @@
 
 This project involves refactoring a MERN stack Google Books API search engine app to utilize a GraphQL API with Apollo Server.
 
-<!-- Landing Page:
+Landing Page
 
-![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/f7dbbc13-5691-47ce-a653-23e0e5d98d54)
+![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/5b8a4215-4127-4b58-8689-21343aac9ea1)
 
-About Me Page:
+Signup Page
 
-![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/fd01db57-91dd-49f1-a610-0f7dbb522282)
+![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/2407a372-3bc3-4238-9fb2-167a39890d6f)
 
-Projects Page:
+Login Page
 
-![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/729e93e9-c487-41e6-8acd-ff69c41d4335)
+![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/9f587dd7-3adc-4952-81f3-8f0c85455a9d)
 
-Contact Page:
+Search Results
 
-![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/e84abbc9-7e07-4280-ad36-0807d1cc8db5)
+![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/6e35d59e-7f6c-4117-b9f3-c9e6ff49567d)
 
-Resume Page:
+Saved Books Page
 
-![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/1497ebde-6637-484d-a3c3-902492879118) -->
+![image](https://github.com/topcowmoo/areca-guppyana/assets/149528212/acde5e29-66dc-4e01-b4e7-7d6321d5fb47)
 
 <!-- BUILT WITH -->
 
@@ -129,7 +128,7 @@ Salvatore Mammoliti - [@github](https://github.com/topcowmoo) - mammoliti.sam@gm
 
 Project Link: [https://github.com/topcowmoo/areca-guppyana](https://github.com/topcowmoo/areca-guppyana)
 
-<!-- Render Link: [https://areca-guppyana.netlify.app/](https://areca-guppyana.netlify.app/) -->
+Render Link: [https://areca-guppyana.onrender.com](https://areca-guppyana.onrender.com)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -145,7 +144,7 @@ Project Link: [https://github.com/topcowmoo/areca-guppyana](https://github.com/t
 - [Best README Template](https://github.com/othneildrew/Best-README-Template)
 - [Simple Icons](https://simpleicons.org/)
 - [MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
-- [Render]{https://render.com/}
+- [Render](https://render.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
